@@ -9,16 +9,16 @@ auto_detect_remappings = false
 optimizer_runs = 999999
 evm_version = "london"
 bytecode_hash = "ipfs"
-extra_output_files = ["metadata"]
+extra_output_files = ["metadata", "abi"]
+eth_rpc_url  = "https://rpc.darwinia.network"
+etherscan_api_key = "xxx"
 
 [rpc_endpoints]
-arbitrum-goerli = "https://goerli-rollup.arbitrum.io/rpc"
-arbitrum-sepolia = "https://sepolia-rollup.arbitrum.io/rpc"
-pangolin = "https://pangolin-rpc.darwinia.network"
+koi = "https://koi-rpc.darwinia.network"
 crab = "https://crab-rpc.darwinia.network"
+darwinia = "https://rpc.darwinia.network"
 
 [etherscan]
-arbitrum-goerli = { key = "${ETHERSCAN_ARBITRUM_KEY}" }
-arbitrum-sepolia = { key = "${ETHERSCAN_ARBITRUM_KEY}" }
-pangolin = { key = "${ETHERSCAN_DARWINIA_KEY}", url = "https://pangolin.api.subscan.io/api/scan/evm/contract/verifysource" }
-crab = { key = "${ETHERSCAN_DARWINIA_KEY}", url = "https://crab.api.subscan.io/api/scan/evm/contract/verifysource" }
+koi = { key = "xxx", url = "https://koi-scan.darwinia.network/api", chain = 701 }
+crab = { key = "xxx", url = "https://crab-scan.darwinia.network/api", chain = 44 }
+darwinia = { key = "xxx", url = "https://explorer.darwinia.network/api", chain = 46 }

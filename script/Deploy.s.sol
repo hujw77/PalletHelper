@@ -2,7 +2,7 @@
 pragma solidity ^0.8.13;
 
 import {Script, console2} from "forge-std/Script.sol";
-import {PalletHelper} from "../scr/PalletHelper.sol";
+import {PalletHelper} from "../src/PalletHelper.sol";
 
 contract Deploy is Script {
 
@@ -20,7 +20,7 @@ contract Deploy is Script {
 	}
 
     function _deploy2(bytes32 salt, bytes memory initCode) internal returns (address) {
-        if (CREATE2_ADDR.code.length == 0) revert CREATE2FactoryNotDeployed();
+        if (CREATE2_ADDR.code.length == 0) revert("CREATE2FactoryNotDeployed");
         bytes memory data = bytes.concat(salt, initCode);
         (, bytes memory addr) = CREATE2_ADDR.call(data);
         return address(uint160(bytes20(addr)));

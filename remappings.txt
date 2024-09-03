@@ -1,1 +1,2 @@
 forge-std/=lib/forge-std/src/
+@darwinia/contracts-utils/=node_modules/@darwinia/contracts-utils/

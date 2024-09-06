@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@darwinia/contracts-utils": "^1.0.4"
+    "@darwinia/contracts-utils": "^1.0.4",
+    "@polkadot/util": "^13.0.2"
   }
 }

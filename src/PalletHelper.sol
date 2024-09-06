@@ -25,6 +25,13 @@ contract PalletHelper {
         return (diff >= 100) ? count : diff * count / 100;
     }
 
+    // Twox64Concat(AccountId20)
+    function getSessionKey(bytes28 owner) public returns (bytes32) {
+        bytes memory storageKey =
+            abi.encodePacked(hex"cec5070d609dd3497f72bde07fc96ba0", hex"4c014e6bf8b8c2c011e7290b85696bb3", owner);
+        return abi.decode(STATE_STORAGE.state_storage(storageKey), (bytes32));
+    }
+
     function decodeUint32(bytes memory data) internal pure returns (uint32) {
         require(data.length == 4, "Bad data");
         bytes memory reversed = Bytes.reverse(data);

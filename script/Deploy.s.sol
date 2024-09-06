@@ -5,7 +5,6 @@ import {Script, console2} from "forge-std/Script.sol";
 import {PalletHelper} from "../src/PalletHelper.sol";
 
 contract Deploy is Script {
-
     address immutable CREATE2_ADDR = 0x4e59b44847b379578588920cA78FbF26c0B4956C;
 
     modifier broadcast() {
@@ -16,8 +15,8 @@ contract Deploy is Script {
 
     function run() public broadcast {
         bytes memory code = type(PalletHelper).creationCode;
-		_deploy2(bytes32(0), code);
-	}
+        _deploy2(bytes32(0), code);
+    }
 
     function _deploy2(bytes32 salt, bytes memory initCode) internal returns (address) {
         if (CREATE2_ADDR.code.length == 0) revert("CREATE2FactoryNotDeployed");

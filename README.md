@@ -1,5 +1,5 @@
 # <h1 align="center"> Pallet Helper </h1>
 
 ```
-PalletHelper: 0x71675DCF3284560FE6779b02843B6EC04dBa62f8
+PalletHelper: 0xDebd7a36A68981E6205A952eBFd615Bb9aD525b4
 ```

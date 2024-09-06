@@ -27,9 +27,10 @@ contract PalletHelper {
 
     // Twox64Concat(AccountId20)
     function getSessionKey(bytes28 owner) public view returns (bytes32) {
-        bytes memory storageKey =
+        bytes memory storage_key =
             abi.encodePacked(hex"cec5070d609dd3497f72bde07fc96ba0", hex"4c014e6bf8b8c2c011e7290b85696bb3", owner);
-        return abi.decode(STATE_STORAGE.state_storage(storageKey), (bytes32));
+        bytes memory session_key = STATE_STORAGE.state_storage(storage_key);
+        return (session_key.length == 32) ? abi.decode(session_key, (bytes32)) : bytes32(0);
     }
 
     function decodeUint32(bytes memory data) internal pure returns (uint32) {

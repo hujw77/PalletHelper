@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import "@darwinia/contracts-utils/contracts/Bytes.sol";
 
 interface StateStorage {
-    function state_storage(bytes memory storageKey) external returns (bytes memory);
+    function state_storage(bytes memory storageKey) external view returns (bytes memory);
 }
 
 contract PalletHelper {
@@ -13,7 +13,7 @@ contract PalletHelper {
     bytes constant COLLATOR_COUNT_KEY = hex"03a4971484692cd58fa781fd333a29702bf10f943ea01b83e17db9b4b2ab031a";
     bytes32 constant MIGRATION_START_TIME_KEY = hex"03a4971484692cd58fa781fd333a29706500b8b0f5e2d08ad46a290ff113be06";
 
-    function getContractCollators() public returns (uint256) {
+    function getContractCollators() public view returns (uint256) {
         bytes memory count_value = STATE_STORAGE.state_storage(COLLATOR_COUNT_KEY);
         uint32 count = decodeUint32(count_value);
 
@@ -26,7 +26,7 @@ contract PalletHelper {
     }
 
     // Twox64Concat(AccountId20)
-    function getSessionKey(bytes28 owner) public returns (bytes32) {
+    function getSessionKey(bytes28 owner) public view returns (bytes32) {
         bytes memory storageKey =
             abi.encodePacked(hex"cec5070d609dd3497f72bde07fc96ba0", hex"4c014e6bf8b8c2c011e7290b85696bb3", owner);
         return abi.decode(STATE_STORAGE.state_storage(storageKey), (bytes32));

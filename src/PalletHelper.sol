@@ -7,13 +7,18 @@ interface StateStorage {
     function state_storage(bytes memory storageKey) external view returns (bytes memory);
 }
 
+interface Hub {
+    function getTopCollators(uint256 k) external view returns (address[] memory);
+}
+
 contract PalletHelper {
     StateStorage constant STATE_STORAGE = StateStorage(0x0000000000000000000000000000000000000400);
+    Hub constant HUB = Hub(0xa4fFAC7A5Da311D724eD47393848f694Baee7930);
 
     bytes constant COLLATOR_COUNT_KEY = hex"03a4971484692cd58fa781fd333a29702bf10f943ea01b83e17db9b4b2ab031a";
     bytes32 constant MIGRATION_START_TIME_KEY = hex"03a4971484692cd58fa781fd333a29706500b8b0f5e2d08ad46a290ff113be06";
 
-    function getContractCollators() public view returns (uint256) {
+    function getActiveCollatorCount() public view returns (uint256) {
         bytes memory count_value = STATE_STORAGE.state_storage(COLLATOR_COUNT_KEY);
         uint32 count = decodeUint32(count_value);
 
@@ -23,6 +28,11 @@ contract PalletHelper {
 
         uint256 diff = (block.timestamp - uint256(migration_start_time) / 1000) * 100 / 60 days;
         return (diff >= 100) ? count : diff * count / 100;
+    }
+
+    function getActiveCollators() public view returns (address[] memory) {
+        uint256 k = getActiveCollatorCount();
+        return HUB.getTopCollators(k);
     }
 
     // Twox64Concat(AccountId20)

@@ -26,8 +26,8 @@ contract PalletHelper {
             STATE_STORAGE.state_storage(abi.encodePacked(MIGRATION_START_TIME_KEY));
         uint128 migration_start_time = decodeUint128(migration_start_time_value);
 
-        uint256 diff = (block.timestamp - uint256(migration_start_time) / 1000) * 100 / 60 days;
-        return (diff >= 100) ? count : diff * count / 100;
+        uint256 diff = (block.timestamp - uint256(migration_start_time) / 1000) * 10000 / 60 days;
+        return (diff >= 10000) ? count : (diff * count + 5000) / 10000;
     }
 
     function getActiveCollators() public view returns (address[] memory) {
